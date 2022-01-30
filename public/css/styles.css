@@ -1,0 +1,145 @@
+/*
+    #a679a6 -> morado gris
+    #504960 -> morado obscuro
+    #d67969 -> rosa gris
+*/
+
+:root {
+    --primary-color: #f6d9f6;
+    --secondary-color: #504960;
+    --terciary-color: #f6e9f6;
+    --quanternary-color: #fae9fa;
+    --primary-shadow: #50406080;
+}
+
+body {
+    background-color: var(--terciary-color);
+
+    margin: 0;
+    padding: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    box-shadow: 0 0 10px var(--primary-shadow);
+
+    margin-block-end: 1em;
+    padding-inline: 1.5rem;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar {
+    display: flex;
+    gap: 1rem;
+}
+.hdr-hd {
+    margin: 0;
+    display: flex;
+}
+.hdr-hd a {
+    height: 5rem;
+    min-width: 4.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    filter: brightness(100%);
+}
+.hdr-hd a:hover {
+    filter: brightness(120%);
+}
+.hdr-hd a.active {
+    cursor: none;
+    pointer-events: none;
+
+    filter: brightness(70%);
+}
+main {
+    height: 85vh;
+
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+/* chat */
+
+.chat {
+    box-shadow: 0 3px 7px var(--primary-shadow);
+    
+    width: 80vw;
+    height: 70vh;
+    overflow: hidden;
+
+    display: grid;
+    grid-template-rows: 10% 65% 25%;
+
+    border-radius: 4px;
+}
+.chat h3 {
+    box-shadow: 0 0 10px var(--primary-shadow);
+    background-color: var(--quanternary-color);
+
+    padding-left: 1em;
+    margin-block: 0;
+
+    display: flex;
+    align-items: center;
+}
+#chat--form {
+    display: grid;
+    grid-template: 
+    "u u" 1fr
+    "m s" 2fr / 1fr auto;
+
+    gap: 10px;
+    padding: 10px;
+}
+#chat--room, #menssage {
+    overflow: hidden scroll;
+}
+#menssage {
+    resize: none;
+    grid-area: m;
+}
+#username {
+    grid-area: u;
+}
+.submit {
+    cursor: pointer;
+    user-select: none;
+
+    height: 45px;
+    width: 45px;
+
+    margin-block: auto;
+
+    font-size: 20px;
+}
+.submit:active {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+.chat--input {
+    box-shadow: 0 0 0 var(--primary-shadow);
+    background-color: transparent;
+    color: var(--secondary-color);
+    border: solid 2px var(--secondary-color);
+    outline: none;
+    
+    padding-inline: .5em;
+    
+    border-radius: 4px;
+    transition: box-shadow;
+}
+.chat--input:focus {
+    box-shadow: 0 0 10px var(--primary-shadow);
+}

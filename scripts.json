@@ -1,0 +1,21 @@
+{
+    "$schema": "https://deno.land/x/denon@2.4.9/schema.json",
+    "scripts": {
+        "dev": {
+            "cmd": "deno run main.ts",
+            "desc": "deno run in dev mode",
+            "allow": ["net", "read", "env"],
+            "unstable": true,
+            "env": { "dev": "true" }
+        }
+    },
+    "watcher": {
+        "exts": [ ".ts" ],
+        "skip": [
+            "*/.git/*",
+            "./views/*",
+            "./public/*",
+            "./dev/*"
+        ]
+    }
+}
