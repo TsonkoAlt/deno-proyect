@@ -1,7 +1,6 @@
 const eventSource = new EventSource('/reload');
 
 eventSource.addEventListener('refresh', evt => {
-    console.log(evt.data);
     if (evt.data === 'reload') {
         location.reload()
     }

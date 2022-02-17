@@ -1,6 +1,10 @@
-import type { customState, User, MenssageRender } from './types.ts';
+import type { customState, User, MenssageRender, Msg } from './types.ts';
 
 const listOfUsers: User[] = [];
+const listOfMsgs: Msg = [
+    'all msg',
+    [],
+];
 
 export const state = {
     sockets: new Set<WebSocket>(),
@@ -9,6 +13,14 @@ export const state = {
             if (ws === current) continue;
             ws.send(data);
         }
+    },
+    getAllMenssages(user) {
+        const data = JSON.stringify(listOfMsgs);
+        const parseData = data.replaceAll(`"${user.username}"`, '"yo"');
+        return parseData;
+    },
+    pushMenssage(msg) {
+        listOfMsgs[1].push(msg);
     },
 
 } as customState;

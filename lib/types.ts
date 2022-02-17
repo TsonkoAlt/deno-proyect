@@ -29,6 +29,15 @@ export type User = {
     username: string | null,
     password: string | null
 };
+type UserAndMsg = {
+    user: string,
+    msg: string,
+}
+
+export type Msg = [
+    string,
+    UserAndMsg[],
+];
 
 export type customState = {
     render?:(
@@ -39,6 +48,8 @@ export type customState = {
     session: Session;
     sockets: Set<WebSocket>;
     sendToAllSockets:(data: string, current?: WebSocket) => void;
+    getAllMenssages(user: User) : string;
+    pushMenssage(msg: UserAndMsg) : void;
 };
 export interface HelperOptions {
     fn: TemplateDelegate;
