@@ -1,19 +1,30 @@
-<div class="chat">
+{{#if profile}}
+<section class="chat">
     <h3>Chat</h3>
     <ul id="chat--room">
         <li>inica la conversación</li>
     </ul>
-    <form id="chat--form" method="post">
-        <input
-            class="chat--input chat--input--text"
-            type="text" placeholder="username"
-            id="username" name="username"
-        required>
+    <form id="chat--form" class="form" method="post">
         <textarea
-            class="chat--input chat--input--text"
-            id="menssage" name="menssage"
+            class="input input--text"
+            name="text"
             placeholder="mensaje"
-        autofocus required></textarea>
-        <button class="chat--input submit" type="submit" value="submit">►</button>
+            autofocus
+            required
+        ></textarea>
+        <button
+            class="input submit"
+            type="submit"
+            value="submit"
+        >►</button>
     </form>
-</div>
+</section>
+{{else}}
+<section class="sect">
+    <h3>inicie secion para usar el chat</h3>
+    <span>
+        <a class="ref animation" href="/signup">signup</a>
+        <a class="ref animation" href="/login">login</a>
+    </span>
+</section>
+{{/if}}

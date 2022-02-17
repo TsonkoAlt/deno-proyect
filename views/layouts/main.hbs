@@ -5,18 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tsonkoalt web</title>
-    <link rel="icon" href="./img/favicon.svg" type="image/x-icon">
+    <link rel="icon" href="/img/favicon.svg" type="image/x-icon">
     {{#if isDev}}
-    <script defer src="./sse.js"></script>
+    <script defer src="/sse.js"></script>
     {{/if}}
+    {{#if profile}}
     {{#isChat pathname}}
-    <script type="module" src="./js/ws/main.js"></script>
+    <script type="module" src="/js/ws/main.js"></script>
     {{/isChat}}
-    <link rel="stylesheet" href="./css/styles.css">
+    {{/if}}
+    <script defer src="/js/main.js"></script>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+    <header>
     {{> header }}
+    </header>
+    {{> navbar}}
+    {{> optsbar}}
     <main>
+        {{#if menssage}}
+        <section id="error" class="animation">
+            {{menssage}}
+            <button>&Cross;</button>
+        </section>
+        {{/if}}
         {{{ body }}}
     </main>
 </body>

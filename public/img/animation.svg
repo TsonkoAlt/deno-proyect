@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="120"
+   height="120"
+   viewBox="0 0 120 120"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="animation.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox-edge-midpoints="false"
+     inkscape:snap-bbox-midpoints="false"
+     inkscape:bbox-paths="false"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="64.16994"
+     inkscape:cy="45.608387"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showguides="false"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:guide-bbox="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid824" />
+    <sodipodi:guide
+       position="0,65"
+       orientation="0,-1"
+       id="guide18020" />
+    <sodipodi:guide
+       position="65,0"
+       orientation="1,0"
+       id="guide18022" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path1041"
+       style="fill:#000000;stroke-width:5;paint-order:markers stroke fill;fill-opacity:1"
+       d="m 45,10 c -5.522847,0 -10,4.47715 -10,10 v 80 c 0,5.52285 4.477153,10 10,10 h 30 c 5.52285,0 10,-4.47715 10,-10 V 20 C 85,14.47715 80.52285,10 75,10 Z m 5,10 h 20 c 2.761424,0 5,2.23857 5,5 v 70 c 0,2.76143 -2.238576,5 -5,5 H 50 c -2.761424,0 -5,-2.238575 -5,-5 V 25 c 0,-2.761425 2.238576,-5 5,-5 z"
+       sodipodi:nodetypes="ssssssssssssssssss" />
+    <path
+       id="path2472"
+       style="fill:#000000;stroke-width:5;paint-order:markers stroke fill;fill-opacity:1"
+       d="M 95 20 C 92.23858 20 90 22.23857 90 25 L 90 95 C 90 97.76143 92.23858 100 95 100 C 97.76142 100 100 97.76143 100 95 L 100 25 C 100 22.23857 97.76142 20 95 20 z " />
+    <path
+       id="path2472-6"
+       style="fill:#000000;stroke-width:5;paint-order:markers stroke fill;fill-opacity:1"
+       d="m 110,35 c -2.76142,0 -5,2.23857 -5,5 v 40 c 0,2.76143 2.23858,5 5,5 2.76142,0 5,-2.23857 5,-5 V 40 c 0,-2.76143 -2.23858,-5 -5,-5 z"
+       sodipodi:nodetypes="sssssss" />
+    <path
+       id="path2472-4"
+       style="fill:#000000;stroke-width:5;paint-order:markers stroke fill;fill-opacity:1"
+       d="m 25,20 c 2.76142,0 5,2.23857 5,5 v 70 c 0,2.76143 -2.23858,5 -5,5 -2.76142,0 -5,-2.23857 -5,-5 V 25 c 0,-2.76143 2.23858,-5 5,-5 z" />
+    <path
+       id="path2472-6-5"
+       style="fill:#000000;stroke-width:5;paint-order:markers stroke fill;fill-opacity:1"
+       d="m 10,35 c 2.76142,0 5,2.23857 5,5 v 40 c 0,2.76143 -2.23858,5 -5,5 C 7.23858,85 5,82.76143 5,80 V 40 c 0,-2.76143 2.23858,-5 5,-5 z"
+       sodipodi:nodetypes="sssssss" />
+  </g>
+</svg>

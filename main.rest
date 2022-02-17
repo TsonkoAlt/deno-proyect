@@ -1,0 +1,28 @@
+POST {{host}}/signup HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+&username=hola
+&password=Soy12
+
+###
+POST {{host}}/signup HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+###
+POST {{host}}/signup HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+&username=test
+&password=Test123
+
+###
+
+GET {{host}}/css/styles.css HTTP/1.1
+
+###
+
+GET {{host}}/img/favicon.svg
+
+###
+
+GET {{host}}

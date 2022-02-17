@@ -1,0 +1,31 @@
+<nav class="bar animation" id="navbar">
+    {{#each navs.normals as |nav|}}
+    <h2 class="hdr--hd">
+        {{#active nav.path}}
+        {{nav.name}}
+        {{/active}}
+    </h2>
+    {{/each}}
+    <section class="dropdown animation">
+        <h2 class="hdr--hd dropdown--head"><button class="refbtn">profile</button></h2>
+        <main class="dropdown--body">
+            {{#if profile}}
+            {{#each navs.register as |nav|}}
+            <h3 class="hdr--hd">
+                {{#active nav.path}}
+                {{nav.name}}
+                {{/active}}
+            </h3>
+            {{/each}}
+            {{else}}
+            {{#each navs.no_register as |nav|}}
+            <h3 class="hdr--hd">
+                {{#active nav.path}}
+                {{nav.name}}
+                {{/active}}
+            </h3>
+            {{/each}}
+            {{/if}}
+        </main>
+    </section>
+</nav>

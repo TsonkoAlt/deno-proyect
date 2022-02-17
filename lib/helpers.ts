@@ -19,9 +19,12 @@ export async function watch(fn: () => void) {
     }
 }
 
-function active(pathname: string, ref: string, opts: HelperOptions) {
-    if (pathname === ref) return `<a class="active" href="${ref}">${opts.fn()}</a>`;
-    return `<a href="${ref}">${opts.fn()}</a>`;
+/* handlebars helpers */
+
+function active(ref: string, opts: HelperOptions) {
+    const pathname = opts?.data?.root.pathname;
+    if (pathname === ref) return `<a class="refbtn animation active" href="${ref}">${opts.fn()}</a>`;
+    return `<a class="refbtn animation" href="${ref}">${opts.fn()}</a>`;
 }
 function isChat(pathname: string, opts: HelperOptions) {
     if (pathname === '/chat') return opts.fn();

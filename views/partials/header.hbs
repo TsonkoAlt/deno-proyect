@@ -1,19 +1,11 @@
-<header>
-    <h1 class="hdr-hd">
-        {{#active pathname "/"}}
-            pagina web
-        {{/active}}
-        </h1>
-    <nav class="navbar">
-        <h2 class="hdr-hd">
-            {{#active pathname "/about"}}
-                about
-            {{/active}}
-        </h2>
-        <h2 class="hdr-hd">
-            {{#active pathname "/chat"}}
-                chat
-            {{/active}}
-        </h2>
-    </nav>
-</header>
+<h1 class="hdr--hd no-bg">
+    <a href="/" class="refbtn">pagina web</a>
+</h1>
+<section id="menu">
+    <button class="menu--btn" id="options">
+        <img class="btn--img filter-img animation" src="/img/options.svg" alt="">
+    </button>
+    <button class="menu--btn" id="more">
+        <img class="btn--img filter-img animation" src="/img/more.svg" alt="">
+    </button>
+</section>

@@ -1,27 +1,26 @@
-import './lib.js';
+import { isParsable, socket, addMsg } from './lib.js';
 
 const sendChat = document.getElementById('chat--form');
 const chatRoom = document.getElementById('chat--room');
 
 socket.addEventListener('message', evt => {
-    const data = isParsable(evt.data);
-    if (typeof data === 'object') {
-        if (data?.type === 'chating') {
-            chatRoom.innerHTML +=
-                `<li class="room--msg">
-                    <h4>${data?.username}</h4>
-                    <span>${data?.menssage}</span>
-                </li>`;
+    const [ isCustomEvent, data ] = isParsable(evt.data);
+    if (isCustomEvent) {
+        if (data[0] === 'chating') {
+            addMsg(chatRoom, data[1]);
         }
     } else {
-        console.log(evt.data);
+        console.log(data);
     }
 });
 
 sendChat.addEventListener('submit', evt => {
-    const username = sendChat.username.value;
-    const menssage = sendChat.menssage.value;
+    const data = {
+        user: sendChat.user.value,
+        text: sendChat.text.value
+    }
     evt.preventDefault();
-    socket.send(JSON.stringify({ type: 'chating', username, menssage }));
+    socket.send(JSON.stringify([ 'chating', data ]));
     sendChat.reset();
+    addMsg(chatRoom, data);
 });

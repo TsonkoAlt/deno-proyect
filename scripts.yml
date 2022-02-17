@@ -1,0 +1,13 @@
+scripts:
+  dev:
+    cmd: main.ts
+    desc: dev
+    allow:
+     - net
+     - env
+     - read
+    unstable: true
+    watch: true
+    envFile: ./.env
+    env:
+      DEV: "true"
