@@ -15,12 +15,9 @@ socket.addEventListener('message', evt => {
 });
 
 sendChat.addEventListener('submit', evt => {
-    const data = {
-        user: sendChat.user.value,
-        text: sendChat.text.value
-    }
     evt.preventDefault();
-    socket.send(JSON.stringify([ 'chating', data ]));
+    const text = sendChat.text.value;
+    socket.send(JSON.stringify([ 'chating', text ]));
     sendChat.reset();
-    addMsg(chatRoom, data);
+    addMsg(chatRoom, { user: 'yo', msg: text });
 });

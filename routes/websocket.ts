@@ -8,18 +8,26 @@ router
 .get('/ws', async (ctx, next) => {
     try {
         const socket = ctx.upgrade()
-        ctx.state.sockets.add(socket);
+        ctx.app.state.sockets.add(socket);
         socket.addEventListener('open', () => {
             socket.send('hola cliente');
             console.log('un cliente a entrado :)');
         });
-        socket.addEventListener('message', evt => {
-            const data = JSON.parse(evt.data);
-            if (data[0] === 'chating') ctx.state.sendToAllSockets(evt.data, socket);
+        socket.addEventListener('message', async evt => {
+            const dataReq = JSON.parse(evt.data);
+            const user = await ctx.state.session.get('profile');
+                    const dataRes = JSON.stringify([
+                        dataReq[0],
+                    {
+                        user: (user as Record<string, unknown>).username,
+                        msg: dataReq[1],
+                    },
+                ]);
+                if (dataReq[0] === 'chating') ctx.app.state.sendToAllSockets(dataRes, socket);
         });
         socket.addEventListener('close', () => {
             console.log('un cliente se ha ido :(');
-            ctx.state.sockets.delete(socket);
+            ctx.app.state.sockets.delete(socket);
         });
         console.log('[sockets]: ', ctx.state.sockets.size);        
     } catch (e) {

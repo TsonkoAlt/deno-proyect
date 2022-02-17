@@ -14,6 +14,7 @@ export function isParsable(data) {
  *  @arg {HTMLElement} chat @arg {{user: string, text: string}} msgData
  * */
 export function addMsg(chat, msgData) {
+    console.log(msgData)
     const msg = document.createElement('li');
     msg.classList.add('chat--msg');
 
@@ -22,7 +23,7 @@ export function addMsg(chat, msgData) {
     msg.appendChild(user);
     
     const text = document.createElement('span');
-    text.innerHTML = msgData.text;
+    text.innerHTML = msgData.msg;
     msg.appendChild(text);
 
     chat.appendChild(msg);

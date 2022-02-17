@@ -386,7 +386,7 @@ input:checked+.switch::before {
 }
 #chat--form>textarea {
     min-height: 4rem;
-    overflow: hidden hidden;
+    resize: vertical;
 }
 #chat--form .submit{
     height: 100%;

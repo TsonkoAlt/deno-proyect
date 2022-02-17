@@ -1,4 +1,4 @@
-import { Application, Status, Session } from './deps.ts';
+import { Application, Status, Session, CookieStore } from './deps.ts';
 import { state } from './lib/utils.ts';
 
 import type { customState } from './lib/types.ts'
@@ -11,8 +11,9 @@ import reloadRouters from './routes/reload.ts';
 import socketRouters from './routes/websocket.ts';
 
 try {
-    const session = new Session();
     const app = new Application<customState>({ state });
+    const store = new CookieStore(Deno.env.get('SECRET_KEY'))
+    const session = new Session(store);
 
     app.use(session.initMiddleware());
     app.use(publicFiles);
