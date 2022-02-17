@@ -5,7 +5,7 @@
 ## tecnologies:
 
 - Websockets
-- Server Send events
+- Server Sent events
 - Sessions
 
 ---

@@ -1,7 +1,7 @@
 scripts:
   dev:
     cmd: main.ts
-    desc: dev
+    desc: start sever in dev mode
     allow:
      - net
      - env
@@ -11,3 +11,12 @@ scripts:
     envFile: ./.env
     env:
       DEV: "true"
+  start:
+    cmd: main.ts
+    desc: start server
+    allow:
+     - net
+     - env
+     - read
+    unstable: true
+    envFile: ./.env
