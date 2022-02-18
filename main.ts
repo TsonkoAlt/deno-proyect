@@ -14,6 +14,8 @@ try {
     const app = new Application<customState>({ state });
     const store = new CookieStore(Deno.env.get('SECRET_KEY'))
     const session = new Session(store);
+    const hostname = Deno.env.get('HOST') ?? 'localhost';
+    const port = parseInt(Deno.env.get('PORT') ?? '8080');
 
     app.use(session.initMiddleware());
     app.use(publicFiles);
@@ -40,8 +42,11 @@ try {
         await next();
     });
     
-    console.log('en vivo desde http://localhost:8080');
-    await app.listen({ port: parseInt(Deno.env.get('PORT') ?? '8000') });
+    console.log(`en vivo desde http://${hostname}:${port}`);
+    await app.listen({
+    	hostname,
+    	port,
+    });
 } catch (e) {
     if (e.name !== 'AddrInUse') {
         console.log(e.name);
