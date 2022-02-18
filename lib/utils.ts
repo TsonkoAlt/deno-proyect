@@ -1,3 +1,5 @@
+import { bcrypt } from '../deps.ts';
+
 import type { customState, User, MenssageRender, Msg } from './types.ts';
 
 const listOfUsers: User[] = [];
@@ -25,7 +27,7 @@ export const state = {
 
 } as customState;
 
-export function userValidate(user: User) : MenssageRender {
+export function userValidateSignup(user: User) : MenssageRender {
     if (user.username === null || user.password === null) return 'complit all fields';
     if (user.username.length < 8) return 'user must be least eight characters';
     if (user.password.length < 8) return 'password must be least eight characters';
@@ -39,4 +41,14 @@ export function userValidate(user: User) : MenssageRender {
     }
     listOfUsers.push(user);
     return;
+}
+
+export async function userValidateLogin(user: User) : Promise<MenssageRender> {
+    if (user.username === null || user.password === null) return 'complit all fields';
+    for (const { username, password } of listOfUsers) {
+        if (username === user.username && await bcrypt.compare(user.password, password as string)) {
+            return;
+        }
+    }
+    return 'user or password are incorrect'
 }

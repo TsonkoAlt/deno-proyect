@@ -10,6 +10,7 @@ export type MenssageRender
 |   'user already exist'
 |   'user must only have alphanumeric characters and underscore'
 |   'user must be least eight characters'
+|   'user or password are incorrect'
 |   undefined;
 
 interface TemplateDelegate<T = unknown> {
