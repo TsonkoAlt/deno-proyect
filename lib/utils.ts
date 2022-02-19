@@ -1,6 +1,6 @@
 import { bcrypt } from '../deps.ts';
 
-import type { customState, User, MenssageRender, Msg } from './types.ts';
+import type { customState, User, MenssageRender, Msg, UserAndWS } from './types.ts';
 
 const listOfUsers: User[] = [];
 const listOfMsgs: Msg = [
@@ -9,11 +9,13 @@ const listOfMsgs: Msg = [
 ];
 
 export const state = {
-    sockets: new Set<WebSocket>(),
-    sendToAllSockets(data: string, current: WebSocket | undefined) {
+    sockets: new Set<UserAndWS>(),
+    sendToAllSockets(data, current, curentUser) {
+        const newData = data.replaceAll(`"${curentUser}"`, '"yo"');
         for (const ws of this.sockets) {
-            if (ws === current) continue;
-            ws.send(data);
+            if (ws.socket === current) continue;
+            else if (curentUser === ws.username) ws.socket.send(newData);
+            else ws.socket.send(data);
         }
     },
     getAllMenssages(user) {

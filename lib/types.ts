@@ -39,6 +39,10 @@ export type Msg = [
     string,
     UserAndMsg[],
 ];
+export type UserAndWS = {
+    username: string,
+    socket: WebSocket,
+} 
 
 export type customState = {
     render?:(
@@ -47,8 +51,8 @@ export type customState = {
     ) => Promise<void>;
     menssageRender?: MenssageRender;
     session: Session;
-    sockets: Set<WebSocket>;
-    sendToAllSockets:(data: string, current?: WebSocket) => void;
+    sockets: Set<UserAndWS>;
+    sendToAllSockets:(data: string, current?: WebSocket, currentUser?: string) => void;
     getAllMenssages(user: User) : string;
     pushMenssage(msg: UserAndMsg) : void;
 };

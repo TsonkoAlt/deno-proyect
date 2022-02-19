@@ -9,7 +9,6 @@ socket.addEventListener('message', evt => {
         if (data[0] === 'chating') {
             addMsg(chatRoom, data[1]);
         } else if (data[0] === 'all msg') {
-            console.log(data[1]);
             for (const msg of data[1]) {
                 addMsg(chatRoom, msg);
             }
