@@ -39,7 +39,7 @@ export default (
             try {
                 const { pathname } = request.url;
                 const profile = await state.session.get('profile') as User;
-                response.body = await handle.renderView(filename, {
+                response.body = handle.renderView(filename, {
                     isDev,
                     pathname,
                     menssage,
