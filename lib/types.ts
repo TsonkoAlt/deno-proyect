@@ -48,19 +48,21 @@ export type UserAndWS = {
     socket: WebSocket,
 } 
 
-export type customState = {
+export type CustomState = {
     render?:(
         filename: string,
         data?: Record<string, unknown>
     ) => Promise<void>;
     menssageRender?: MenssageRender;
     session: Session;
+};
+export type ORM = {
     sockets: Set<UserAndWS>;
     sendToAllSockets:(data: string, current?: WebSocket, currentUser?: string) => void;
     getAllMenssages(user: string) : UserAndMsg[];
     pushMenssage(msg: UserAndMsg) : void;
     getAllUsers(user?: string) : string;
-};
+}
 export interface HelperOptions {
     fn: TemplateDelegate;
     inverse: TemplateDelegate;

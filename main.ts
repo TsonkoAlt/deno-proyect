@@ -1,7 +1,6 @@
 import { Application, Status, Session, CookieStore } from './deps.ts';
-import { state } from './lib/utils.ts';
 
-import type { customState } from './lib/types.ts'
+import type { CustomState } from './lib/types.ts'
 
 import hbsRender from './middlewares/render.ts';
 import publicFiles from './middlewares/static-files.ts';
@@ -12,7 +11,7 @@ import reloadRouters from './routes/reload.ts';
 import socketRouters from './routes/websocket.ts';
 
 try {
-    const app = new Application<customState>({ state });
+    const app = new Application<CustomState>();
     const store = new CookieStore(Deno.env.get('SECRET_KEY'))
     const session = new Session(store);
     const hostname = Deno.env.get('HOST') ?? 'localhost';

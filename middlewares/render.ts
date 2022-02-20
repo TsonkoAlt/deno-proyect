@@ -1,6 +1,6 @@
 import { Handlebars, HandlebarsConfig, Middleware } from '../deps.ts';
 import { helpers } from '../lib/helpers.ts';
-import type { User, customState } from '../lib/types.ts';
+import type { User, CustomState } from '../lib/types.ts';
 
 const isDev = Deno.env.get('DEV') === 'true';
 
@@ -50,4 +50,4 @@ export default (
         await next();
         delete state.render;
     }
-) as Middleware<customState>;
+) as Middleware<CustomState>;

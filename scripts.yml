@@ -11,6 +11,14 @@ scripts:
     envFile: ./.env
     env:
       DEV: "true"
+  test:
+    cmd: deno test main.ts
+    desc: test files
+    allow:
+     - net
+     - env
+     - read
+    unstable: true
   start:
     cmd: main.ts
     desc: start server

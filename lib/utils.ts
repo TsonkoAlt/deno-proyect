@@ -1,11 +1,11 @@
 import { bcrypt } from '../deps.ts';
 
-import type { customState, User, MenssageRender, UserAndWS, UserAndMsg, UserOrNull } from './types.ts';
+import type { ORM, User, MenssageRender, UserAndWS, UserAndMsg, UserOrNull } from './types.ts';
 
 const listOfUsers: User[] = [];
 const listOfMsgs: UserAndMsg[] = [];
 
-export const state = {
+export const orm = {
     sockets: new Set<UserAndWS>(),
     sendToAllSockets(data, current, curentUser) {
         const newData = data.replaceAll(`"user":"${curentUser}"`, '"user":"yo"');
@@ -42,7 +42,7 @@ export const state = {
         return JSON.stringify(data);
     }
 
-} as customState;
+} as ORM;
 
 export function userValidateSignup(user: UserOrNull) : MenssageRender {
     if (user.username === null || user.password === null) return 'complit all fields';

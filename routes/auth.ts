@@ -1,13 +1,13 @@
 import { Router, bcrypt, REDIRECT_BACK } from '../deps.ts';
 
-import type { customState } from '../lib/types.ts'
+import type { CustomState } from '../lib/types.ts'
 import { userValidateSignup, userValidateLogin } from '../lib/utils.ts';
 
-const router = new Router<customState>();
+const router = new Router<CustomState>();
 
 router
 .get('/signup', async ({ state, app, response }) => {
-    const appState = app.state as customState;
+    const appState = app.state as CustomState;
     if (await state.session.has('profile')) response.redirect(REDIRECT_BACK, '/');
     else {
         await state.render?.('auth/signup');
@@ -16,7 +16,7 @@ router
 })
 .post('/signup',
     async ({ request, response, app, state }) => {
-        const appState = app.state as customState;
+        const appState = app.state as CustomState;
         const params: URLSearchParams = await request.body().value;
         const user = {
             username: params.get('username'),
@@ -35,7 +35,7 @@ router
     }
 )
 .get('/login', async ({ state, app, response }) => {
-    const appState = app.state as customState;
+    const appState = app.state as CustomState;
     if (await state.session.has('profile')) response.redirect('/');
     else {
         await state.render?.('auth/login');
@@ -44,7 +44,7 @@ router
 })
 .post('/login',
     async ({ request, response, app, state }) => {
-        const appState = app.state as customState;
+        const appState = app.state as CustomState;
         const params: URLSearchParams = await request.body().value;
         const user = {
             username: params.get('username'),

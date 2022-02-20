@@ -1,8 +1,10 @@
 import { Router, REDIRECT_BACK } from '../deps.ts';
 
-import type { customState, User } from '../lib/types.ts'
+import type { CustomState, User } from '../lib/types.ts'
 
-const router = new Router<customState>();
+import { orm } from '../lib/utils.ts';
+
+const router = new Router<CustomState>();
 
 router
 .get('/', async ({ state }) => {
@@ -11,11 +13,11 @@ router
 .get('/about',  async ({ state }) => {
     await state.render?.('about');
 })
-.get('/chat', async ({ state, app }) => {
+.get('/chat', async ({ state }) => {
     const profile = await state.session.get('profile') as User;
     const chats
         = profile?.username != undefined
-        ? app.state.getAllMenssages(profile?.username)
+        ? orm.getAllMenssages(profile?.username)
         : undefined
     ;
     await state.render?.('chat', {
