@@ -36,16 +36,21 @@ export default (
     async function ({ response, state, app, request }, next) {
         const { menssageRender: menssage } = app.state;
         state.render = async (filename: string, data?: Record<string, unknown> | undefined) => {
-            const { pathname } = request.url;
-            const profile = await state.session.get('profile') as User;
-            response.body = await handle.renderView(filename, {
-                isDev,
-                pathname,
-                menssage,
-                navs,
-                profile,
-                ...data,
-            });
+            try {
+                const { pathname } = request.url;
+                const profile = await state.session.get('profile') as User;
+                response.body = await handle.renderView(filename, {
+                    isDev,
+                    pathname,
+                    menssage,
+                    navs,
+                    profile,
+                    ...data,
+                });
+            } catch (err) {
+                console.log(err);
+                response.body = 'hola :)';
+            }
         }
         await next();
         delete state.render;
