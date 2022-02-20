@@ -1,6 +1,6 @@
 import { Router } from '../deps.ts';
 
-import type { customState, User } from '../lib/types.ts';
+import type { customState, User, UserAndMsg } from '../lib/types.ts';
 
 const router = new Router<customState>();
 
@@ -8,32 +8,44 @@ router
 .get('/ws', async (ctx, next) => {
     try {
         const socket = ctx.upgrade()
+        const appState = ctx.app.state as customState;
         const profile = await ctx.state.session.get('profile') as User;
-        ctx.app.state.sockets.add({username: profile.username, socket: socket});
+        appState.sockets.add({ username: profile.username, socket: socket });
         socket.addEventListener('open', () => {
             console.log('un cliente a entrado :)');
-            socket.send(ctx.app.state.getAllMenssages(profile));
+            appState.sendToAllSockets(
+                appState.getAllUsers(profile.username),
+            );
         });
         socket.addEventListener('message', async evt => {
             const dataReq = JSON.parse(evt.data) as string[];
             const user = await ctx.state.session.get('profile') as User;
-                const dataRes = [
+                const dataRes: [ string, UserAndMsg ] = [
                     dataReq[0],
                     {
                         user: user.username,
                         msg: dataReq[1],
                     },
                 ];
-                ctx.app.state.pushMenssage(dataRes[1]);
+                appState.pushMenssage(dataRes[1]);
                 if (dataReq[0] === 'chating') {
-                    ctx.app.state.sendToAllSockets(JSON.stringify(dataRes), socket, user.username);
+                    appState.sendToAllSockets(
+                        JSON.stringify(dataRes),
+                        socket,
+                        user.username,
+                    );
                 }
         });
         socket.addEventListener('close', () => {
             console.log('un cliente se ha ido :(');
-            ctx.app.state.sockets.delete(socket);
+            for (const ws of appState.sockets) {
+                if (socket === ws.socket) {
+                    appState.sockets.delete(ws);
+                    break;
+                }
+            }
         });
-        console.log('[sockets]: ', ctx.state.sockets.size);        
+        console.log('[sockets]: ', appState.sockets.size);        
     } catch (e) {
         console.log(e);
     } finally {

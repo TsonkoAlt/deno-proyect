@@ -11,7 +11,8 @@ export function isParsable(data) {
 }
 
 /**
- *  @arg {HTMLElement} chat @arg {{user: string, text: string}} msgData
+ *  @arg {HTMLElement} chat
+ * @arg {{user: string, text: string}} msgData
  * */
 export function addMsg(chat, msgData) {
     const msg = document.createElement('li');
@@ -21,9 +22,26 @@ export function addMsg(chat, msgData) {
     user.innerText = msgData.user;
     msg.appendChild(user);
     
-    const text = document.createElement('span');
+    const text = document.createElement('p');
     text.innerText = msgData.msg;
     msg.appendChild(text);
 
     chat.appendChild(msg);
+}
+/**
+ * @arg {HTMLElement} list 
+ * @arg {string[]} users 
+ */
+export function paintUsers(list, users) {
+    const frag = new DocumentFragment()
+    for (const user of users) {
+        const li = document.createElement('li');
+        li.innerText = user;
+        frag.appendChild(li);
+    }
+    if (list.children.length > 0) {
+        list.replaceChild(frag, list.children[0]);
+    } else {
+        list.appendChild(frag);
+    }
 }

@@ -27,10 +27,14 @@ type Data = {
     last: boolean
 };
 export type User = {
-    username: string | null,
-    password: string | null
+    username: string,
+    password: string,
 };
-type UserAndMsg = {
+export type UserOrNull = {
+    username: string | null,
+    password: string | null,
+}
+export type UserAndMsg = {
     user: string,
     msg: string,
 }
@@ -53,8 +57,9 @@ export type customState = {
     session: Session;
     sockets: Set<UserAndWS>;
     sendToAllSockets:(data: string, current?: WebSocket, currentUser?: string) => void;
-    getAllMenssages(user: User) : string;
+    getAllMenssages(user: string) : UserAndMsg[];
     pushMenssage(msg: UserAndMsg) : void;
+    getAllUsers(user?: string) : string;
 };
 export interface HelperOptions {
     fn: TemplateDelegate;

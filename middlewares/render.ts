@@ -1,7 +1,6 @@
 import { Handlebars, HandlebarsConfig, Middleware } from '../deps.ts';
 import { helpers } from '../lib/helpers.ts';
-
-import type { customState } from '../lib/types.ts';
+import type { User, customState } from '../lib/types.ts';
 
 const isDev = Deno.env.get('DEV') === 'true';
 
@@ -38,7 +37,7 @@ export default (
         const { menssageRender: menssage } = app.state;
         state.render = async (filename: string, data?: Record<string, unknown> | undefined) => {
             const { pathname } = request.url;
-            const profile = await state.session.get('profile');
+            const profile = await state.session.get('profile') as User;
             response.body = await handle.renderView(filename, {
                 isDev,
                 pathname,

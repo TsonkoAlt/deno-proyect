@@ -7,24 +7,23 @@ const router = new Router<customState>();
 
 router
 .get('/signup', async ({ state, app, response }) => {
+    const appState = app.state as customState;
     if (await state.session.has('profile')) response.redirect(REDIRECT_BACK, '/');
     else {
-        console.log(state.menssageRender);
         await state.render?.('auth/signup');
-        app.state.menssageRender = undefined;
+        appState.menssageRender = undefined;
     }
 })
 .post('/signup',
     async ({ request, response, app, state }) => {
-        console.log('estas aqui');
+        const appState = app.state as customState;
         const params: URLSearchParams = await request.body().value;
         const user = {
             username: params.get('username'),
             password: params.get('password'),
         };
-        app.state.menssageRender = userValidateSignup(user);
-        console.log(user, app.state.menssageRender);
-        if (app.state.menssageRender !== undefined) response.redirect('/signup');
+        appState.menssageRender = userValidateSignup(user);
+        if (appState.menssageRender !== undefined) response.redirect('/signup');
         else {
             user.password = await bcrypt.hash(
                 user.password ?? '',
@@ -36,22 +35,23 @@ router
     }
 )
 .get('/login', async ({ state, app, response }) => {
+    const appState = app.state as customState;
     if (await state.session.has('profile')) response.redirect('/');
     else {
-        console.log(state.menssageRender);
         await state.render?.('auth/login');
-        app.state.menssageRender = undefined;
+        appState.menssageRender = undefined;
     }
 })
 .post('/login',
     async ({ request, response, app, state }) => {
+        const appState = app.state as customState;
         const params: URLSearchParams = await request.body().value;
         const user = {
             username: params.get('username'),
             password: params.get('password'),
         }
-        app.state.menssageRender = await userValidateLogin(user);
-        if (app.state.menssageRender !== undefined) response.redirect('/login');
+        appState.menssageRender = await userValidateLogin(user);
+        if (appState.menssageRender !== undefined) response.redirect('/login');
         else {
             await state.session.set('profile', user);
             response.redirect('/profile');

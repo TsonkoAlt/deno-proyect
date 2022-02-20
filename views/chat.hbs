@@ -1,8 +1,22 @@
 {{#if profile}}
 <section class="chat">
-    <h3>Chat</h3>
+    <header>
+        <h3>Chat</h3>
+        <ul id="chat--users"></ul>
+    </header>
     <ul id="chat--room">
+        {{#each chats}}
+        <li class="chat--msg">
+            <h4>
+                {{this.user}}
+            </h4>
+            <p>
+                {{this.msg}}
+            </p>
+        </li>
+        {{else}}
         <li>inica la conversación</li>
+        {{/each}}
     </ul>
     <form id="chat--form" class="form" method="post">
         <textarea

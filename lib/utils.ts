@@ -1,35 +1,50 @@
 import { bcrypt } from '../deps.ts';
 
-import type { customState, User, MenssageRender, Msg, UserAndWS } from './types.ts';
+import type { customState, User, MenssageRender, UserAndWS, UserAndMsg, UserOrNull } from './types.ts';
 
 const listOfUsers: User[] = [];
-const listOfMsgs: Msg = [
-    'all msg',
-    [],
-];
+const listOfMsgs: UserAndMsg[] = [];
 
 export const state = {
     sockets: new Set<UserAndWS>(),
     sendToAllSockets(data, current, curentUser) {
-        const newData = data.replaceAll(`"${curentUser}"`, '"yo"');
+        const newData = data.replaceAll(`"user":"${curentUser}"`, '"user":"yo"');
         for (const ws of this.sockets) {
             if (ws.socket === current) continue;
             else if (curentUser === ws.username) ws.socket.send(newData);
             else ws.socket.send(data);
         }
     },
-    getAllMenssages(user) {
-        const data = JSON.stringify(listOfMsgs);
-        const parseData = data.replaceAll(`"${user.username}"`, '"yo"');
-        return parseData;
+    getAllMenssages(username) {
+        return listOfMsgs.map(value => {
+            return {
+                user: username === value.user ? 'yo' : value.user,
+                msg: value.msg,
+            };
+        });
     },
     pushMenssage(msg) {
-        listOfMsgs[1].push(msg);
+        listOfMsgs.push(msg);
     },
+    getAllUsers(username) {
+        const users =
+        listOfUsers.map(value => {
+            if (value.username !== username) return value.username;
+            else return 'yo';
+        });
+        const data : [ 'users', string[] ] =
+        [
+            'users',
+            users
+        ];
+        console.log(listOfUsers);
+        console.log(data);
+        return JSON.stringify(data);
+    }
 
 } as customState;
 
-export function userValidateSignup(user: User) : MenssageRender {
+export function userValidateSignup(user: UserOrNull) : MenssageRender {
     if (user.username === null || user.password === null) return 'complit all fields';
     if (user.username.length < 8) return 'user must be least eight characters';
     if (user.password.length < 8) return 'password must be least eight characters';
@@ -41,11 +56,11 @@ export function userValidateSignup(user: User) : MenssageRender {
     for (const { username } of listOfUsers) {
         if (username === user.username) return 'user already exist';
     }
-    listOfUsers.push(user);
+    listOfUsers.push(user as User);
     return;
 }
 
-export async function userValidateLogin(user: User) : Promise<MenssageRender> {
+export async function userValidateLogin(user: UserOrNull) : Promise<MenssageRender> {
     if (user.username === null || user.password === null) return 'complit all fields';
     for (const { username, password } of listOfUsers) {
         if (username === user.username && await bcrypt.compare(user.password, password as string)) {

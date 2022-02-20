@@ -353,16 +353,17 @@ input:checked+.switch::before {
 
     border-radius: 4px;
 }
-.chat h3 {
+.chat header {
     box-shadow: 0 0 10px var(--primary-shadow);
     background-color: var(--sect-bg-color);
 
     height: 3rem;
-    padding-left: 1em;
+    padding-inline: 1em;
     margin-block: 0;
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 #chat--form {
     display: grid;
