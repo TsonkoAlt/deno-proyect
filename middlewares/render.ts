@@ -39,7 +39,7 @@ export default (
             try {
                 const { pathname } = request.url;
                 const profile = await state.session.get('profile') as User;
-                response.body = handle.renderView(filename, {
+                const body = await handle.renderView(filename, {
                     isDev,
                     pathname,
                     menssage,
@@ -47,6 +47,8 @@ export default (
                     profile,
                     ...data,
                 });
+                console.log(body);
+                response.body = body;
             } catch (err) {
                 console.log(err);
                 response.body = 'hola :)';
