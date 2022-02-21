@@ -5,8 +5,9 @@
         <ul id="chat--users"></ul>
     </header>
     <ul id="chat--room">
+        <li class="begin--chat">inica la conversación</li>
         {{#each chats}}
-        <li class="chat--msg">
+        {{itsMe this.user}}
             <h4>
                 {{this.user}}
             </h4>
@@ -14,8 +15,6 @@
                 {{this.msg}}
             </p>
         </li>
-        {{else}}
-        <li>inica la conversación</li>
         {{/each}}
     </ul>
     <form id="chat--form" class="form" method="post">

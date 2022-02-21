@@ -1,6 +1,6 @@
 import { Router } from '../deps.ts';
 
-import type {  CustomState, User, UserAndMsg } from '../lib/types.ts';
+import type {  CustomState, UserOrNull,  User, UserAndMsg } from '../lib/types.ts';
 
 import { orm } from '../lib/utils.ts'
 
@@ -15,12 +15,15 @@ router
         socket.addEventListener('open', () => {
             console.log('un cliente a entrado :)');
             orm.sendToAllSockets(
-                orm.getAllUsers(profile.username),
+                orm.getAllUsers(),
             );
         });
         socket.addEventListener('message', async evt => {
             const dataReq = JSON.parse(evt.data) as string[];
-            const user = await ctx.state.session.get('profile') as User;
+            const user = await ctx.state.session.get('profile') as UserOrNull;
+            if (user.username === null) ctx.response.redirect('/signup');
+            else {
+
                 const dataRes: [ string, UserAndMsg ] = [
                     dataReq[0],
                     {
@@ -36,6 +39,7 @@ router
                         user.username,
                     );
                 }
+            }
         });
         socket.addEventListener('close', () => {
             console.log('un cliente se ha ido :(');

@@ -37,8 +37,6 @@ export const orm = {
             'users',
             users
         ];
-        console.log(listOfUsers);
-        console.log(data);
         return JSON.stringify(data);
     }
 

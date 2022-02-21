@@ -15,6 +15,9 @@ router
     target.addEventListener('error', evt => {
         console.log('c%/reload:', 'color:red', evt);
     });
+    target.addEventListener('close', () => {
+        console.log('desconectado :|');
+    });
     watch(() => {
         target.dispatchEvent(event);
     });

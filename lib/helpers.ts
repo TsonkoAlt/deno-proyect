@@ -29,5 +29,10 @@ function active(ref: string, opts: HelperOptions) {
 function isChat(pathname: string, opts: HelperOptions) {
     if (pathname === '/chat') return opts.fn();
 }
+function itsMe(user: string) {
+    console.log(user);
+    if (user === 'yo') return '<li class="chat--msg me">';
+    return '<li class="chat--msg">';
+}
 
-export const helpers = { active, isChat };
+export const helpers = { active, isChat, itsMe };
