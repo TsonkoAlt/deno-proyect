@@ -14,7 +14,7 @@ router
     await state.render?.('about');
 })
 .get('/chat', async ({ state }) => {
-    const profile = await state.session.get('profile') as User;
+    const profile = <User>await state.session.get('profile');
     const chats
         = profile?.username != undefined
         ? orm.getAllMenssages(profile?.username)

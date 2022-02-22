@@ -14,7 +14,7 @@ try {
     const app = new Application<CustomState>();
     const store = new CookieStore(Deno.env.get('SECRET_KEY'))
     const session = new Session(store);
-    const hostname = Deno.env.get('HOST') as string ?? 'localhost';
+    const hostname = <string>Deno.env.get('HOST') ?? 'localhost';
     const port = parseInt(Deno.env.get('PORT') ?? '8080');
 
     app.use(session.initMiddleware());

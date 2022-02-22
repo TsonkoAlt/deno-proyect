@@ -32,13 +32,13 @@ const navs = {
         { path: '/login', name: 'login' },
     ],
 };
-export default (
+export default <Middleware<CustomState>>(
     async function ({ response, state, app, request }, next) {
         const { menssageRender: menssage } = app.state;
         state.render = async (filename: string, data?: Record<string, unknown> | undefined) => {
             try {
                 const { pathname } = request.url;
-                const profile = await state.session.get('profile') as User;
+                const profile = <User> await state.session.get('profile');
                 response.body = await handle.renderView(filename, {
                     isDev,
                     pathname,
@@ -55,4 +55,4 @@ export default (
         await next();
         delete state.render;
     }
-) as Middleware<CustomState>;
+);

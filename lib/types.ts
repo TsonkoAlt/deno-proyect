@@ -13,50 +13,49 @@ export type MenssageRender
 |   'user or password are incorrect'
 |   undefined;
 
-interface TemplateDelegate<T = unknown> {
-    (ctx?: T, options?: Data): string;
-}
-type Data = {
-    root: Record<string, unknown>,
-    _parent: {
-        root: Record<string, unknown>
-    },
-    key: number,
-    index: number,
-    first: boolean,
-    last: boolean
-};
-export type User = {
-    username: string,
-    password: string,
-};
-export type UserOrNull = {
-    username: string | null,
-    password: string | null,
-}
-export type UserAndMsg = {
-    user: string,
-    msg: string,
-}
-
 export type Msg = [
     string,
     UserAndMsg[],
 ];
-export type UserAndWS = {
-    username: string,
-    socket: WebSocket,
+interface TemplateDelegate<T = unknown> {
+    (ctx?: T, options?: Data): string;
+}
+interface Data {
+    root: Record<string, unknown>;
+    _parent: {
+        root: Record<string, unknown>
+    };
+    key: number;
+    index: number;
+    first: boolean;
+    last: boolean;
+}
+export interface User {
+    username: string;
+    password: string;
+}
+export interface UserOrNull {
+    username: string | null;
+    password: string | null;
+}
+export interface UserAndMsg {
+    user: string;
+    msg: string;
+}
+export interface UserAndWS {
+    username: string;
+    socket: WebSocket;
 } 
 
-export type CustomState = {
+export interface CustomState {
     render?:(
         filename: string,
         data?: Record<string, unknown>
     ) => Promise<void>;
     menssageRender?: MenssageRender;
     session: Session;
-};
-export type ORM = {
+}
+export interface ORM {
     sockets: Set<UserAndWS>;
     sendToAllSockets:(data: string, current?: WebSocket, currentUser?: string) => void;
     getAllMenssages(user: string) : UserAndMsg[];

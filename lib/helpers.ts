@@ -23,16 +23,15 @@ export async function watch(fn: () => void) {
 
 function active(ref: string, opts: HelperOptions) {
     const pathname = opts?.data?.root.pathname;
-    if (pathname === ref) return `<a class="refbtn animation active" href="${ref}">${opts.fn()}</a>`;
-    return `<a class="refbtn animation" href="${ref}">${opts.fn()}</a>`;
+    return `<a class="refbtn animation ${ pathname === ref ? 'active' : '' }" href="${ ref }">
+    ${ opts.fn() }
+</a>`;
 }
 function isChat(pathname: string, opts: HelperOptions) {
     if (pathname === '/chat') return opts.fn();
 }
 function itsMe(user: string) {
-    console.log(user);
-    if (user === 'yo') return '<li class="chat--msg me">';
-    return '<li class="chat--msg">';
+    return `<li class="chat--msg ${ user === 'yo' ? 'me' : '' }">`;
 }
 
 export const helpers = { active, isChat, itsMe };

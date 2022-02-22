@@ -2,7 +2,7 @@ import {  Middleware } from '../deps.ts';
 
 import { thisFileExist } from '../lib/helpers.ts';
 
-export default (
+export default <Middleware>(
     async function(ctx, next) {
         const { pathname } = ctx.request.url;
         const root = Deno.cwd() + '/public';
@@ -10,4 +10,4 @@ export default (
         if (await thisFileExist(root + pathname)) await ctx.send({ root });
         else await next();
     }
-) as Middleware;
+);

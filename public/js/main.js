@@ -80,19 +80,19 @@ function inDarkMode() {
     root.style.setProperty('--hdr-bg-color', '#6545b0');
     root.style.setProperty('--hdr-fg-color', '#c6b0cf');
     root.style.setProperty('--body-bg-color', '#15101a');
-    root.style.setProperty('--sect-bg-color', '#201c26');
-    root.style.setProperty('--dropdown-bg-color', '#25212b');
+    root.style.setProperty('--sect-bg-color', '#1c1822');
+    root.style.setProperty('--dropdown-bg-color', '#2a2630');
     root.style.setProperty('--body-fg-color', '#a394a3');
     root.style.setProperty('--primary-shadow', '#40305080');
-    root.style.setProperty('--refbtn-active', 'brightness(110%)');
+    root.style.setProperty('--refbtn-active', 'brightness(120%)');
     root.style.setProperty('--filter-img', 'invert(98%) sepia(79%) saturate(3323%) hue-rotate(186deg) brightness(85%) contrast(89%)');
 }
 function inLightMode() {
     root.style.setProperty('--hdr-bg-color', '#a585d0');
     root.style.setProperty('--hdr-fg-color', '#542d5e');
     root.style.setProperty('--body-bg-color', '#f5f0fa');
-    root.style.setProperty('--sect-bg-color', '#e5e0ea');
-    root.style.setProperty('--dropdown-bg-color', '#dedbe3');
+    root.style.setProperty('--sect-bg-color', '#eeeaf5');
+    root.style.setProperty('--dropdown-bg-color', '#dedae5');
     root.style.setProperty('--body-fg-color', '#534453');
     root.style.setProperty('--primary-shadow', '#50406080');
     root.style.setProperty('--refbtn-active', 'brightness(93%)');

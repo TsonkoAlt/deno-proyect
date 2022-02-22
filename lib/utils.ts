@@ -5,7 +5,7 @@ import type { ORM, User, MenssageRender, UserAndWS, UserAndMsg, UserOrNull } fro
 const listOfUsers: User[] = [];
 const listOfMsgs: UserAndMsg[] = [];
 
-export const orm = {
+export const orm: ORM = {
     sockets: new Set<UserAndWS>(),
     sendToAllSockets(data, current, curentUser) {
         const newData = data.replaceAll(`"user":"${curentUser}"`, '"user":"yo"');
@@ -40,7 +40,7 @@ export const orm = {
         return JSON.stringify(data);
     }
 
-} as ORM;
+};
 
 export function userValidateSignup(user: UserOrNull) : MenssageRender {
     if (user.username === null || user.password === null) return 'complit all fields';
@@ -54,14 +54,14 @@ export function userValidateSignup(user: UserOrNull) : MenssageRender {
     for (const { username } of listOfUsers) {
         if (username === user.username) return 'user already exist';
     }
-    listOfUsers.push(user as User);
+    listOfUsers.push(<User>user);
     return;
 }
 
 export async function userValidateLogin(user: UserOrNull) : Promise<MenssageRender> {
     if (user.username === null || user.password === null) return 'complit all fields';
     for (const { username, password } of listOfUsers) {
-        if (username === user.username && await bcrypt.compare(user.password, password as string)) {
+        if (username === user.username && await bcrypt.compare(user.password, <string>password)) {
             return;
         }
     }

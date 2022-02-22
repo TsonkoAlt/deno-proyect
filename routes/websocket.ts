@@ -1,6 +1,6 @@
 import { Router } from '../deps.ts';
 
-import type {  CustomState, UserOrNull,  User, UserAndMsg } from '../lib/types.ts';
+import type {  CustomState, User, UserAndMsg } from '../lib/types.ts';
 
 import { orm } from '../lib/utils.ts'
 
@@ -10,7 +10,7 @@ router
 .get('/ws', async (ctx, next) => {
     try {
         const socket = ctx.upgrade()
-        const profile = await ctx.state.session.get('profile') as User;
+        const profile = <User>await ctx.state.session.get('profile');
         orm.sockets.add({ username: profile.username, socket: socket });
         socket.addEventListener('open', () => {
             console.log('un cliente a entrado :)');
@@ -18,16 +18,14 @@ router
                 orm.getAllUsers(),
             );
         });
-        socket.addEventListener('message', async evt => {
-            const dataReq = JSON.parse(evt.data) as string[];
-            const user = await ctx.state.session.get('profile') as UserOrNull;
-            if (user.username === null) ctx.response.redirect('/signup');
+        socket.addEventListener('message', evt => {
+            const dataReq = <string[]>JSON.parse(evt.data);
+            if (profile.username === null) ctx.response.redirect('/signup');
             else {
-
                 const dataRes: [ string, UserAndMsg ] = [
                     dataReq[0],
                     {
-                        user: user.username,
+                        user: profile.username,
                         msg: dataReq[1],
                     },
                 ];
@@ -36,7 +34,7 @@ router
                     orm.sendToAllSockets(
                         JSON.stringify(dataRes),
                         socket,
-                        user.username,
+                        profile.username,
                     );
                 }
             }

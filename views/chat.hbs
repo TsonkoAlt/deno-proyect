@@ -7,14 +7,13 @@
     <ul id="chat--room">
         <li class="begin--chat">inica la conversación</li>
         {{#each chats}}
-        {{itsMe this.user}}
+        {{{itsMe this.user}}}
             <h4>
                 {{this.user}}
             </h4>
             <p>
                 {{this.msg}}
             </p>
-        </li>
         {{/each}}
     </ul>
     <form id="chat--form" class="form" method="post">

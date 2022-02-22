@@ -23,3 +23,7 @@ sendChat.addEventListener('submit', evt => {
     sendChat.reset();
     addMsg(chatRoom, { user: 'yo', msg: text });
 });
+
+chatRoom.addEventListener('scroll', () => {
+    console.log(chatRoom.scrollTop, chatRoom.scrollHeight);
+});
