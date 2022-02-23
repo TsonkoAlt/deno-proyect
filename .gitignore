@@ -2,4 +2,6 @@ test
 .vscode
 deno-workspace.yml
 dev.sh
+deno
+deno-reload.exe
 .env
