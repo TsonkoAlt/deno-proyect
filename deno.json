@@ -1,0 +1,12 @@
+{
+  "fmt": {
+    "files": {
+      "exclude": ["views/", "test/", "public/css/", "public/img/"]
+    },
+    "options": {
+      "singleQuote": true,
+      "useTabs": false,
+      "indentWidth": 2
+    }
+  }
+}
