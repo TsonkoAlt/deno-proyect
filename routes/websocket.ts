@@ -14,7 +14,7 @@ router
       orm.sockets.add({ username: profile.username, socket: socket });
       socket.addEventListener('open', () => {
         console.log('un cliente a entrado :)');
-        orm.sendToAllSockets(
+        orm.sendToSockets(
           orm.getAllUsers(),
         );
       });
@@ -29,7 +29,7 @@ router
         ];
         orm.pushMenssage(dataRes[1]);
         if (dataReq[0] === 'chating') {
-          orm.sendToAllSockets(
+          orm.sendToSockets(
             JSON.stringify(dataRes),
             socket,
             profile.username,

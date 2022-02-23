@@ -14,15 +14,16 @@ const listOfMsgs: UserAndMsg[] = [];
 
 export const orm: ORM = {
   sockets: new Set<UserAndWS>(),
-  sendToAllSockets(data, current, curentUser) {
+  sendToSockets(data, current, curentUser, toUser) {
     const newData = data.replaceAll(
       `"user":"${curentUser}"`,
-      '"user":"yo"',
+      '"user":"me"',
     );
     for (const ws of this.sockets) {
       if (ws.socket === current) continue;
       else if (curentUser === ws.username) ws.socket.send(newData);
-      else ws.socket.send(data);
+      else if (toUser == null) ws.socket.send(data);
+      else if (toUser === ws.username) ws.socket.send(data);
     }
   },
   getAllMenssages(username) {

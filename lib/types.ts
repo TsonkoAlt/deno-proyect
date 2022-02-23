@@ -57,10 +57,11 @@ export interface CustomState {
 }
 export interface ORM {
   sockets: Set<UserAndWS>;
-  sendToAllSockets: (
+  sendToSockets: (
     data: string,
     current?: WebSocket,
     currentUser?: string,
+    toUser?: string | null,
   ) => void;
   getAllMenssages(user: string): UserAndMsg[];
   pushMenssage(msg: UserAndMsg): void;
